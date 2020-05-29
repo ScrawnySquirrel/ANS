@@ -4,7 +4,7 @@
 UNAME=$1
 UPASS=$2
 
-[ -z UNAME ] || [ -z UPASS ] && { echo "Missing arguments"; exit; }
+[ -z $UNAME ] || [ -z $UPASS ] && { echo "Missing arguments"; exit; }
 
 echo Setting up Apache
 

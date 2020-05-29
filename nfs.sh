@@ -6,7 +6,7 @@ UPASS=$2
 MPATH=$3
 DEST_IP=$4
 
-[ -z UNAME ] || [ -z UPASS ] || [ -z MPATH ] || [ -z DEST_IP ] && { echo "Missing arguments"; exit; }
+[ -z $UNAME ] || [ -z $UPASS ] || [ -z $MPATH ] || [ -z $DEST_IP ] && { echo "Missing arguments"; exit; }
 
 echo Setting up NFS
 
