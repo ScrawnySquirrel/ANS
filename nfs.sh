@@ -2,11 +2,10 @@
 
 # Arguments
 UNAME=$1
-UPASS=$2
-MPATH=$3
-DEST_IP=$4
+MPATH=$2
+DEST_IP=$3
 
-[ -z $UNAME ] || [ -z $UPASS ] || [ -z $MPATH ] || [ -z $DEST_IP ] && { echo "Missing arguments"; exit; }
+[ -z $UNAME ] || [ -z $MPATH ] || [ -z $DEST_IP ] && { echo "Missing arguments"; exit; }
 
 echo Setting up NFS
 
@@ -21,6 +20,9 @@ else
   echo Creating user
   useradd $UNAME
 fi
+
+UHOME=$(eval echo "~$UNAME")
+chmod 755 -R $UHOME
 
 # Setup exports
 EXPORTS=/etc/exports
