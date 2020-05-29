@@ -31,4 +31,8 @@ echo -e "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tgues
 systemctl restart smb
 echo | smbclient -L localhost
 
+SVR_IP=$(hostname -I | awk '{print $1}')
+[ $? -ne SVR_IP] && { SVR_IP="<hostname/IP>"}
+echo "Samba Mount: \\\\${SVR_IP}\\${UNAME}"
+
 echo Samba finished

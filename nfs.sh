@@ -32,4 +32,8 @@ echo "$MPATH ${DEST_IP}(rw,insecure,no_root_squash)" >>  $EXPORTS
 systemctl restart nfs-server
 exportfs -v
 
+SVR_IP=$(hostname -I | awk '{print $1}')
+[ $? -ne SVR_IP] && { SVR_IP="<hostname/IP>"}
+echo "NFS Mount: mkdir ${UNAME}; mount -t nfs ${SVR_IP}:/${UHOME} ${UNAME}"
+
 echo NFS finished
