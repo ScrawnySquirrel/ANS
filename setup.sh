@@ -50,26 +50,26 @@ eval set -- "$PARAMS"
 
 [ ! $APACHE ] && [ ! $NFS ] && [ ! $SAMBA ] && { echo "No tasks selected"; echo $HELP; exit; }
 
-HAS_ERROR=false
+APACHE_ERR=false
+NFS_ERR=false
+SAMBA_ERR=false
 
 # Apache Setup
 if [[ $APACHE ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; HAS_ERROR=true; }
-  ./apache.sh $UNAME $PASSWD
+  [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; APACHE_ERR=true; }
+  [ ! $APACHE_ERR ] && { ./apache.sh $UNAME $PASSWD; }
 fi
 
 # NFS Setup
 if [[ $NFS ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] || [ -z $DEST_IP ] && { echo "NFS: Missing arguments"; HAS_ERROR=true; }
-  ./nfs.sh $UNAME $PASSWD $MOUNT_PATH $DEST_IP
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] || [ -z $DEST_IP ] && { echo "NFS: Missing arguments"; NFS_ERR=true; }
+  [ ! $NFS_ERR ] && { ./nfs.sh $UNAME $PASSWD $MOUNT_PATH $DEST_IP; }
 fi
 
 # Samba Setup
 if [[ $SAMBA ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; HAS_ERROR=true; }
-  ./samba.sh $UNAME $PASSWD $MOUNT_PATH $DEST_IP
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; SAMBA_ERR=true; }
+  [ ! $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH $DEST_IP; }
 fi
 
-if [[ $HAS_ERROR ]]; then
-  echo $HELP
-fi
+[ APACHE_ERR ] || [ NFS_ERR ] || [ SAMBA_ERR ] && { echo $HELP; }
