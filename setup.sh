@@ -52,18 +52,21 @@ eval set -- "$PARAMS"
 
 # Apache Setup
 if [[ $APACHE ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; echo $HELP; exit; }
   echo Setting up Apache
+  [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; echo $HELP; break; }
+  echo Apache finished
 fi
 
 # NFS Setup
 if [[ $NFS ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "NFS: Missing arguments"; echo $HELP; exit; }
   echo Setting up NFS
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "NFS: Missing arguments"; echo $HELP; break; }
+  echo NFS finished
 fi
 
 # Samba Setup
 if [[ $SAMBA ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; echo $HELP; exit; }
   echo Setting up Samba
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; echo $HELP; break; }
+  echo Samba finished
 fi
