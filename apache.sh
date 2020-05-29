@@ -35,6 +35,9 @@ if [[ ! -d $UHOME/public_html ]]; then
   fi
 fi
 
+chmod 755 -R $UHOME
+echo "${UNAME}'s home page" > $UHOME/public_html/index.html
+
 AUTH_FILE=$UNAME
 
 # Comment out
@@ -42,16 +45,21 @@ sed -i '/<Directory \"\/home\/\*\/public_html\">/,/<\/Directory>/d' $UDIR_PATH
 
 # Append if not already
 if ! grep "<Directory /var/www/html/passwords>" $UDIR_PATH; then
-  echo -n "<Directory /var/www/html/passwords>\n  order deny,allow\n  deny from all\n</Directory>\n" >> $UDIR_PATH
+  echo -e "<Directory /var/www/html/passwords>\n  order deny,allow\n  deny from all\n</Directory>\n" >> $UDIR_PATH
 fi
 
 # Append for user
 if ! grep "<Directory /home/$UNAME>" $UDIR_PATH; then
-  echo -n "<Directory /home/$UNAME>\n  AllowOverride None\n  AuthUserFile /var/www/html/passwords/$AUTH_FILE\n  AuthGroupFile /dev/null\n  AuthName test\n  AuthType Basic\n  <Limit GET>\n    require valid-user\n    order deny,allow\n    deny from all\n    allow from all\n  </Limit>\n</Directory>\n" >> $UDIR_PATH
+  echo -e "<Directory /home/$UNAME>\n  AllowOverride None\n  AuthUserFile /var/www/html/passwords/$AUTH_FILE\n  AuthGroupFile /dev/null\n  AuthName test\n  AuthType Basic\n  <Limit GET>\n    require valid-user\n    order deny,allow\n    deny from all\n    allow from all\n  </Limit>\n</Directory>\n" >> $UDIR_PATH
 fi
 
 # Create password directory
-mkdir /var/www/html/passwords; chmod 755 /var/www/html/passwords; cd /var/www/html/passwords
+PW_PATH=/var/www/html/passwords
+[ ! -d $PW_PATH ] && { mkdir $PW_PATH; }
+chmod 755 -R $PW_PATH
+cd $PW_PATH
 htpasswd -bc $AUTH_FILE $UNAME $UPASS
+
+systemctl restart httpd
 
 echo Apache finished
