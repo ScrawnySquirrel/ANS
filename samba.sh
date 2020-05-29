@@ -22,13 +22,13 @@ fi
 
 # Setup configuration
 SMB_CONF=/etc/samba/smb.conf
-echo "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tguest ok = yes\n\tprintable = no\n" >> $SMB_CONF
+echo -e "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tguest ok = yes\n\tprintable = no\n" >> $SMB_CONF
+
+# Set authentication
+(echo $UPASS; echo $UPASS) | smbpasswd -s -a $UNAME
 
 # Start Samba
 systemctl restart smb
 smbclient -L localhost
-
-# Set authentication
-(echo $UPASS; echo $UPASS) | smbpasswd -s -a $UNAME
 
 echo Samba finished
