@@ -50,23 +50,23 @@ eval set -- "$PARAMS"
 
 [ ! $APACHE ] && [ ! $NFS ] && [ ! $SAMBA ] && { echo "No tasks selected"; echo $HELP; exit; }
 
+HAS_ERROR=false
+
 # Apache Setup
 if [[ $APACHE ]]; then
-  echo Setting up Apache
-  [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; echo $HELP; break; }
-  echo Apache finished
+  [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; HAS_ERROR=true; }
 fi
 
 # NFS Setup
 if [[ $NFS ]]; then
-  echo Setting up NFS
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "NFS: Missing arguments"; echo $HELP; break; }
-  echo NFS finished
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "NFS: Missing arguments"; HAS_ERROR=true; }
 fi
 
 # Samba Setup
 if [[ $SAMBA ]]; then
-  echo Setting up Samba
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; echo $HELP; break; }
-  echo Samba finished
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; HAS_ERROR=true; }
+fi
+
+if [[ $HAS_ERROR ]]; then
+  echo $HELP
 fi

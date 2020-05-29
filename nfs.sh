@@ -6,6 +6,8 @@ UPASS=$2
 MPATH=$3
 DEST_IP=$4
 
+echo Setting up NFS
+
 # Install NFS
 dnf install nfs-utils
 systemctl enable nfs-server.service
@@ -25,3 +27,5 @@ echo "$MPATH ${DEST_IP}(rw,insecure,no_root_squash)" >>  $EXPORTS
 # Start NFS
 systemctl restart nfs-server
 exportfs -v
+
+echo NFS finished

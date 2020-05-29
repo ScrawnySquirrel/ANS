@@ -4,6 +4,8 @@
 UNAME=$1
 UPASS=$2
 
+echo Setting up Apache
+
 # Install Apache
 dnf install httpd
 systemctl enable httpd
@@ -54,3 +56,5 @@ fi
 # Create password directory
 mkdir /var/www/html/passwords; chmod 755 /var/www/html/passwords; cd /var/www/html/passwords
 htpasswd -c $AUTH_FILE $UNAME
+
+echo Apache finished
