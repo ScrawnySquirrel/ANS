@@ -36,7 +36,7 @@ if [[ ! -d $UHOME/public_html ]]; then
 fi
 
 chmod 755 -R $UHOME
-echo "${UNAME}'s home page'"
+echo "${UNAME}'s home page'" > $UHOME/public_html/index.html
 
 AUTH_FILE=$UNAME
 
