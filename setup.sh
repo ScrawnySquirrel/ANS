@@ -26,6 +26,10 @@ while (( "$#" )); do
       PASSWD=$2
       shift 2
       ;;
+    -i|--ip)
+      DEST_IP=$2
+      shift 2
+      ;;
     -m|--mount)
       MOUNT_PATH=$2
       shift 2
