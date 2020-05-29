@@ -29,6 +29,6 @@ echo -e "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tgues
 
 # Start Samba
 systemctl restart smb
-smbclient -L localhost
+echo | smbclient -L localhost
 
 echo Samba finished
