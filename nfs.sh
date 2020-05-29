@@ -21,6 +21,9 @@ else
   useradd $UNAME
 fi
 
+UHOME=$(eval echo "~$UNAME")
+chmod 755 -R $UHOME
+
 # Setup exports
 EXPORTS=/etc/exports
 echo "$MPATH ${DEST_IP}(rw,insecure,no_root_squash)" >>  $EXPORTS
