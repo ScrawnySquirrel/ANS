@@ -48,20 +48,22 @@ done
 # set positional arguments in their proper place
 eval set -- "$PARAMS"
 
+[ ! $APACHE ] && [ ! $NFS ] && [ ! $SAMBA ] && { echo "No tasks selected"; echo $HELP; exit; }
+
 # Apache Setup
 if [[ $APACHE ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] && { echo $HELP; exit; }
+  [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; echo $HELP; exit; }
   echo Setting up Apache
 fi
 
 # NFS Setup
 if [[ $NFS ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo $HELP; exit; }
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "NFS: Missing arguments"; echo $HELP; exit; }
   echo Setting up NFS
 fi
 
 # Samba Setup
 if [[ $SAMBA ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo $HELP; exit; }
+  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; echo $HELP; exit; }
   echo Setting up Samba
 fi
