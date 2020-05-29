@@ -5,6 +5,10 @@ UNAME=$1
 UPASS=$2
 MPATH=$3
 
+[ -z $UNAME ] || [ -z $UPASS ] || [ -z $MPATH ] && { echo "Missing arguments"; exit; }
+
+echo Setting up Samba
+
 dnf install samba
 systemctl enable smb.service
 
@@ -26,3 +30,5 @@ smbclient -L localhost
 
 # Set authentication
 (echo $UPASS; echo $UPASS) | smbpasswd -s -a $UNAME
+
+echo Samba finished

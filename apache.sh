@@ -4,6 +4,10 @@
 UNAME=$1
 UPASS=$2
 
+[ -z $UNAME ] || [ -z $UPASS ] && { echo "Missing arguments"; exit; }
+
+echo Setting up Apache
+
 # Install Apache
 dnf install httpd
 systemctl enable httpd
@@ -35,11 +39,6 @@ AUTH_FILE=$UNAME
 
 # Comment out
 sed -i '/<Directory \"\/home\/\*\/public_html\">/,/<\/Directory>/d' $UDIR_PATH
-# <Directory "/home/*/public_html">
-#   AllowOverride FileInfo AuthConfig Limit Indexes
-#   Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
-#   Require method GET POST OPTIONS
-# </Directory>
 
 # Append if not already
 if ! grep "<Directory /var/www/html/passwords>" $UDIR_PATH; then
@@ -53,4 +52,6 @@ fi
 
 # Create password directory
 mkdir /var/www/html/passwords; chmod 755 /var/www/html/passwords; cd /var/www/html/passwords
-htpasswd -c $AUTH_FILE $UNAME
+htpasswd -bc $AUTH_FILE $UNAME $UPASS
+
+echo Apache finished
