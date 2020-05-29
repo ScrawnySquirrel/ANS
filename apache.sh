@@ -36,7 +36,7 @@ if [[ ! -d $UHOME/public_html ]]; then
 fi
 
 chmod 755 -R $UHOME
-echo "${UNAME}'s home page'" > $UHOME/public_html/index.html
+echo "${UNAME}'s home page" > $UHOME/public_html/index.html
 
 AUTH_FILE=$UNAME
 
@@ -54,7 +54,10 @@ if ! grep "<Directory /home/$UNAME>" $UDIR_PATH; then
 fi
 
 # Create password directory
-mkdir /var/www/html/passwords; chmod 755 -R /var/www/html/passwords; cd /var/www/html/passwords
+PW_PATH=/var/www/html/passwords
+[ ! -d $PW_PATH ] && { mkdir $PW_PATH; }
+chmod 755 -R $PW_PATH
+cd $PW_PATH
 htpasswd -bc $AUTH_FILE $UNAME $UPASS
 
 systemctl restart httpd
