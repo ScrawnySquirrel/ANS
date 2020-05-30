@@ -58,19 +58,19 @@ SAMBA_ERR=false
 # Apache Setup
 if [[ $APACHE ]]; then
   [ -z $UNAME ] || [ -z $PASSWD ] && { echo "Apache: Missing arguments"; APACHE_ERR=true; }
-  [ ! $APACHE_ERR ] && { ./apache.sh $UNAME $PASSWD; }
+  [ $APACHE_ERR ] && { ./apache.sh $UNAME $PASSWD; }
 fi
 
 # NFS Setup
 if [[ $NFS ]]; then
   [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] || [ -z $DEST_IP ] && { echo "NFS: Missing arguments"; NFS_ERR=true; }
-  [ ! $NFS_ERR ] && { ./nfs.sh $UNAME $MOUNT_PATH $DEST_IP; }
+  [ $NFS_ERR ] && { ./nfs.sh $UNAME $DEST_IP $MOUNT_PATH ; }
 fi
 
 # Samba Setup
 if [[ $SAMBA ]]; then
   [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; SAMBA_ERR=true; }
-  [ ! $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
+  [ $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
 fi
 
 [ APACHE_ERR ] || [ NFS_ERR ] || [ SAMBA_ERR ] && { echo -e $HELP; }
