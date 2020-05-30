@@ -5,7 +5,10 @@ UNAME=$1
 MPATH=$2
 DEST_IP=$3
 
-[ -z $UNAME ] || [ -z $MPATH ] || [ -z $DEST_IP ] && { echo "Missing arguments"; exit; }
+FILENAME=$(basename $0)
+USAGE="${FILENAME} <username> <mount-path> <destination-ip>"
+
+[ -z $UNAME ] || [ -z $MPATH ] || [ -z $DEST_IP ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 
 echo Setting up NFS
 

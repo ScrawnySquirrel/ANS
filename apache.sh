@@ -4,7 +4,10 @@
 UNAME=$1
 UPASS=$2
 
-[ -z $UNAME ] || [ -z $UPASS ] && { echo "Missing arguments"; exit; }
+FILENAME=$(basename $0)
+USAGE="${FILENAME} <username> <password>"
+
+[ -z $UNAME ] || [ -z $UPASS ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 
 echo Setting up Apache
 

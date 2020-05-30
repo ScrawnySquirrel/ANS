@@ -5,7 +5,10 @@ UNAME=$1
 UPASS=$2
 MPATH=$3
 
-[ -z $UNAME ] || [ -z $UPASS ] || [ -z $MPATH ] && { echo "Missing arguments"; exit; }
+FILENAME=$(basename $0)
+USAGE="${FILENAME} <username> <password> <mount-path>"
+
+[ -z $UNAME ] || [ -z $UPASS ] || [ -z $MPATH ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 
 echo Setting up Samba
 
