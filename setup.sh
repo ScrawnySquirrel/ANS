@@ -63,13 +63,13 @@ fi
 # NFS Setup
 if [[ $NFS ]]; then
   [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] || [ -z $DEST_IP ] && { echo "NFS: Missing arguments"; NFS_ERR=true; }
-  [ ! $NFS_ERR ] && { ./nfs.sh $UNAME $PASSWD $MOUNT_PATH $DEST_IP; }
+  [ ! $NFS_ERR ] && { ./nfs.sh $UNAME $MOUNT_PATH $DEST_IP; }
 fi
 
 # Samba Setup
 if [[ $SAMBA ]]; then
   [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; SAMBA_ERR=true; }
-  [ ! $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH $DEST_IP; }
+  [ ! $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
 fi
 
 [ APACHE_ERR ] || [ NFS_ERR ] || [ SAMBA_ERR ] && { echo $HELP; }
