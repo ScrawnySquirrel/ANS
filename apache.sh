@@ -66,7 +66,7 @@ htpasswd -bc $AUTH_FILE $UNAME $UPASS
 systemctl restart httpd
 
 SVR_IP=$(hostname -I | awk '{print $1}')
-[ $? -ne SVR_IP ] && { SVR_IP="<hostname/IP>"; }
+[ $? -ne 0 ] && { SVR_IP="<hostname/IP>"; }
 echo "Apache Access: http://${SVR_IP}/~${UNAME}/"
 
 echo Apache finished
