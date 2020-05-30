@@ -70,6 +70,7 @@ htpasswd -bc $AUTH_FILE $UNAME $UPASS
 
 # Restart service
 systemctl restart httpd; systemctl status httpd
+setenforce 0
 
 # Output access details
 SVR_IP=$(hostname -I | awk '{print $1}')

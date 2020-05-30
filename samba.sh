@@ -39,6 +39,7 @@ echo -e "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tgues
 
 # Restart service
 systemctl restart smb; systemctl status smb
+setenforce 0
 
 # Output config
 echo | smbclient -L localhost
