@@ -1,6 +1,7 @@
 #!/bin/bash
 
-HELP="help me"
+FILENAME=$(basename $0)
+HELP="Usage: \n${FILENAME} [-a] [-n] [-s] [-u username] [-p password] [-i destination_ip] [-m mount_path]\n -a\tSetup Apache\n -n\tSetup NFS\n -s\tSetup Samba\n -u\tUsername for login \n -p\tPassword for the login user\n -i\tDestination IP address\n -m\tMount path"
 
 PARAMS=""
 
@@ -48,7 +49,7 @@ done
 # set positional arguments in their proper place
 eval set -- "$PARAMS"
 
-[ ! $APACHE ] && [ ! $NFS ] && [ ! $SAMBA ] && { echo "No tasks selected"; echo $HELP; exit; }
+[ ! $APACHE ] && [ ! $NFS ] && [ ! $SAMBA ] && { echo "No tasks selected"; echo -e $HELP; exit; }
 
 APACHE_ERR=false
 NFS_ERR=false
@@ -72,4 +73,4 @@ if [[ $SAMBA ]]; then
   [ ! $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
 fi
 
-[ APACHE_ERR ] || [ NFS_ERR ] || [ SAMBA_ERR ] && { echo $HELP; }
+[ APACHE_ERR ] || [ NFS_ERR ] || [ SAMBA_ERR ] && { echo -e $HELP; }
