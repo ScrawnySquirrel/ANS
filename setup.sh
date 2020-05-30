@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FILENAME=$(basename $0)
-HELP="Usage: \n${FILENAME} [-a] [-n] [-s] [-u username] [-p password] [-i destination_ip] [-m mount_path]\n -a\tSetup Apache\n -n\tSetup NFS\n -s\tSetup Samba\n -u\tUsername for login (Required: a, n, s)\n -p\tPassword for the login user (Required: a, s)\n -i\tDestination IP address (Required: n)\n -m\tMount path (Required: n, s)"
+HELP="Usage: \n${FILENAME} [-a] [-n] [-s] [-u username] [-p password] [-i destination_ip] [-m mount_path]\n -a\tSetup Apache\t(Requires: -u, -p)\n -n\tSetup NFS\t(Requires: -u, -m, -i)\n -s\tSetup Samba\t(Requires: -u, -p, -m)\n -u\tUsername for login\n -p\tPassword for login user\n -i\tDestination IP address\n -m\tMount path"
 
 PARAMS=""
 
