@@ -37,6 +37,6 @@ exportfs -v
 
 SVR_IP=$(hostname -I | awk '{print $1}')
 [ $? -ne 0 ] && { SVR_IP="<hostname/IP>"; }
-echo "NFS Mount: mkdir ${UNAME}; mount -t nfs ${SVR_IP}:/${UHOME} ${UNAME}"
+echo "NFS Mount: mkdir ${UNAME}; mount -t nfs ${SVR_IP}:${UHOME} ${UNAME}"
 
 echo NFS finished
