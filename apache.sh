@@ -4,7 +4,10 @@
 UNAME=$1
 UPASS=$2
 
-[ -z $UNAME ] || [ -z $UPASS ] && { echo "Missing arguments"; exit; }
+FILENAME=$(basename $0)
+USAGE="Usage: ${FILENAME} <username> <password>"
+
+[ -z $UNAME ] || [ -z $UPASS ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 
 echo Setting up Apache
 
@@ -61,5 +64,9 @@ cd $PW_PATH
 htpasswd -bc $AUTH_FILE $UNAME $UPASS
 
 systemctl restart httpd
+
+SVR_IP=$(hostname -I | awk '{print $1}')
+[ $? -ne SVR_IP] && { SVR_IP="<hostname/IP>"}
+echo "Apache Access: http://${SVR_IP}/~${UNAME}/"
 
 echo Apache finished
