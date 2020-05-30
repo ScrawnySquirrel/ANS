@@ -4,6 +4,8 @@ Bash script to execute basic setup of Apache, NFS, and Samba (ANS) on Linux.
 ## Getting Started
 This is a simple install and setup for Apache, NFS, and Samba. It setups up Apache to allow user logins, configure NFS to allow network file sharing to specific IP, and enables Samba to be accessible using credentials. 
 
+Each script can be ran individually, however using `setup.sh` is ideal as it can be used to install all 3 services and meant to be more user friendly with messages.
+
 ## Prerequisite
 * Bash
 
