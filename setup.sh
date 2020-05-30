@@ -70,7 +70,7 @@ fi
 # Samba Setup
 if [[ $SAMBA ]]; then
   [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] && { echo "Samba: Missing arguments"; SAMBA_ERR=true; }
-  [ $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
+  [ $SAMBA_ERR ] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
 fi
 
 [ ! APACHE_ERR ] || [ ! NFS_ERR ] || [ ! SAMBA_ERR ] && { echo -e $HELP; }
