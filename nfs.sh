@@ -2,11 +2,11 @@
 
 # Arguments
 UNAME=$1
-MPATH=$2
-DEST_IP=$3
+DEST_IP=$2
+MPATH=$3
 
 FILENAME=$(basename $0)
-USAGE="Usage: ${FILENAME} <username> <mount-path> <destination-ip>"
+USAGE="Usage: ${FILENAME} <username> <destination-ip> <mount-path>"
 
 [ -z $UNAME ] || [ -z $MPATH ] || [ -z $DEST_IP ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 
