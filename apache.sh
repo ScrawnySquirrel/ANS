@@ -69,7 +69,8 @@ cd $PW_PATH
 htpasswd -bc $AUTH_FILE $UNAME $UPASS
 
 # Restart service
-systemctl restart httpd; systemctl status httpd
+systemctl restart httpd
+echo "Service is: $(systemctl status httpd)"
 setenforce 0
 
 # Output access details

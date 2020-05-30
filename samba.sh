@@ -38,7 +38,8 @@ echo -e "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tgues
 (echo $UPASS; echo $UPASS) | smbpasswd -s -a $UNAME
 
 # Restart service
-systemctl restart smb; systemctl status smb
+systemctl restart smb
+echo "Service is: $(systemctl status smb)"
 setenforce 0
 
 # Output config
