@@ -35,7 +35,7 @@ EXPORTS=/etc/exports
 echo "$MPATH ${DEST_IP}(rw,insecure,no_root_squash)" >>  $EXPORTS
 
 # Restart service
-systemctl restart nfs-server
+systemctl restart nfs-server; systemctl status nfs-server
 
 # Output config
 exportfs -v

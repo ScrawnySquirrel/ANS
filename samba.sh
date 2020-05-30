@@ -38,7 +38,7 @@ echo -e "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tgues
 (echo $UPASS; echo $UPASS) | smbpasswd -s -a $UNAME
 
 # Restart service
-systemctl restart smb
+systemctl restart smb; systemctl status smb
 
 # Output config
 echo | smbclient -L localhost

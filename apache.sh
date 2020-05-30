@@ -69,7 +69,7 @@ cd $PW_PATH
 htpasswd -bc $AUTH_FILE $UNAME $UPASS
 
 # Restart service
-systemctl restart httpd
+systemctl restart httpd; systemctl status httpd
 
 # Output access details
 SVR_IP=$(hostname -I | awk '{print $1}')
