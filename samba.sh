@@ -6,7 +6,7 @@ UPASS=$2
 MPATH=$3
 
 FILENAME=$(basename $0)
-USAGE="${FILENAME} <username> <password> <mount-path>"
+USAGE="Usage: ${FILENAME} <username> <password> <mount-path>"
 
 [ -z $UNAME ] || [ -z $UPASS ] || [ -z $MPATH ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 

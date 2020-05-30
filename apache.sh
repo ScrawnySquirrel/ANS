@@ -5,7 +5,7 @@ UNAME=$1
 UPASS=$2
 
 FILENAME=$(basename $0)
-USAGE="${FILENAME} <username> <password>"
+USAGE="Usage: ${FILENAME} <username> <password>"
 
 [ -z $UNAME ] || [ -z $UPASS ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 
