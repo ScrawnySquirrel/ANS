@@ -71,7 +71,7 @@ fi
 
 # NFS Setup
 if [[ $NFS ]]; then
-  [ -z $UNAME ] || [ -z $PASSWD ] || [ -z $MOUNT_PATH ] || [ -z $DEST_IP ] && { echo "NFS: Missing arguments"; NFS_ERR=true; }
+  [ -z $UNAME ] || [ -z $MOUNT_PATH ] || [ -z $DEST_IP ] && { echo "NFS: Missing arguments"; NFS_ERR=true; }
   [ $NFS_ERR ] && { ./nfs.sh $UNAME $DEST_IP $MOUNT_PATH ; }
 fi
 
