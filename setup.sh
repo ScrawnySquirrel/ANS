@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# Set help message
 FILENAME=$(basename $0)
 HELP="Usage: \n${FILENAME} [-a] [-n] [-s] [-u username] [-p password] [-i destination_ip] [-m mount_path]\n -a\tSetup Apache\t(Requires: -u, -p)\n -n\tSetup NFS\t(Requires: -u, -i, -m)\n -s\tSetup Samba\t(Requires: -u, -p, -m)\n -u\tUsername for login\n -p\tPassword for login user\n -i\tDestination IP address\n -m\tMount path"
 
+# Argument parsing
 PARAMS=""
 
 while (( "$#" )); do
@@ -35,6 +37,10 @@ while (( "$#" )); do
       MOUNT_PATH=$2
       shift 2
       ;;
+    -h|--help)
+      echo -e $HELP
+      shift
+      ;;
     -*|--*=) # unsupported flags
       echo "Error: Unsupported flag $1" >&2
       exit 1
@@ -49,8 +55,10 @@ done
 # set positional arguments in their proper place
 eval set -- "$PARAMS"
 
+# Check if no action is specified
 [ ! $APACHE ] && [ ! $NFS ] && [ ! $SAMBA ] && { echo "No tasks selected"; echo -e $HELP; exit; }
 
+# Check if one or more setup has failures
 APACHE_ERR=false
 NFS_ERR=false
 SAMBA_ERR=false
@@ -73,4 +81,5 @@ if [[ $SAMBA ]]; then
   [ $SAMBA_ERR ] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
 fi
 
+# If failure, output help message
 [ ! APACHE_ERR ] || [ ! NFS_ERR ] || [ ! SAMBA_ERR ] && { echo -e $HELP; }

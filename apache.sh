@@ -4,9 +4,11 @@
 UNAME=$1
 UPASS=$2
 
+# Set usage description
 FILENAME=$(basename $0)
 USAGE="Usage: ${FILENAME} <username> <password>"
 
+# Check required arguments
 [ -z $UNAME ] || [ -z $UPASS ] && { echo -e "Missing arguments\n${USAGE}"; exit; }
 
 echo Setting up Apache
@@ -38,7 +40,10 @@ if [[ ! -d $UHOME/public_html ]]; then
   fi
 fi
 
+# Set user home directory permissions
 chmod 755 -R $UHOME
+
+# Create user's index.html
 echo "${UNAME}'s home page" > $UHOME/public_html/index.html
 
 AUTH_FILE=$UNAME
@@ -63,8 +68,10 @@ chmod 755 -R $PW_PATH
 cd $PW_PATH
 htpasswd -bc $AUTH_FILE $UNAME $UPASS
 
+# Restart service
 systemctl restart httpd
 
+# Output access details
 SVR_IP=$(hostname -I | awk '{print $1}')
 [ $? -ne 0 ] && { SVR_IP="<hostname/IP>"; }
 echo "Apache Access: http://${SVR_IP}/~${UNAME}/"
