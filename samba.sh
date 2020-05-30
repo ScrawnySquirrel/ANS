@@ -39,7 +39,7 @@ echo -e "[${UNAME}]\n\tpath = ${MPATH}\n\tpublic = yes\n\twritable = yes\n\tgues
 
 # Restart service
 systemctl restart smb
-echo "Service is: $(systemctl is-active smb)"
+systemctl is-active --quiet smb && echo smb is running
 setenforce 0
 
 # Output config

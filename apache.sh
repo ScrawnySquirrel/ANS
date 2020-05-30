@@ -70,7 +70,7 @@ htpasswd -bc $AUTH_FILE $UNAME $UPASS
 
 # Restart service
 systemctl restart httpd
-echo "Service is: $(systemctl is-active httpd)"
+systemctl is-active --quiet httpd && echo httpd is running
 setenforce 0
 
 # Output access details

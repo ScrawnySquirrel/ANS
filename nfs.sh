@@ -36,7 +36,7 @@ echo "$MPATH ${DEST_IP}(rw,insecure,no_root_squash)" >>  $EXPORTS
 
 # Restart service
 systemctl restart nfs-server
-echo "Service is: $(systemctl is-active nfs-server)"
+systemctl is-active --quiet nfs-server && echo nfs-server is running
 setenforce 0
 
 # Output config
