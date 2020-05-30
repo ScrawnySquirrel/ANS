@@ -15,7 +15,7 @@ USAGE="Usage: ${FILENAME} <username> <password> <mount-path>"
 echo Setting up Samba
 
 # Install Samba
-dnf install samba
+dnf install samba -y
 systemctl enable smb.service
 
 # Create user if not exist

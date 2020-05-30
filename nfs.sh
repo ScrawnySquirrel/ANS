@@ -15,7 +15,7 @@ USAGE="Usage: ${FILENAME} <username> <destination-ip> <mount-path>"
 echo Setting up NFS
 
 # Install NFS
-dnf install nfs-utils
+dnf install nfs-utils -y
 systemctl enable nfs-server.service
 
 # Create user if not exist

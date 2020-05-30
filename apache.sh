@@ -14,7 +14,7 @@ USAGE="Usage: ${FILENAME} <username> <password>"
 echo Setting up Apache
 
 # Install Apache
-dnf install httpd
+dnf install httpd -y
 systemctl enable httpd
 
 # Enable user accounts
