@@ -73,4 +73,4 @@ if [[ $SAMBA ]]; then
   [ $SAMBA_ERR] && { ./samba.sh $UNAME $PASSWD $MOUNT_PATH; }
 fi
 
-[ APACHE_ERR ] || [ NFS_ERR ] || [ SAMBA_ERR ] && { echo -e $HELP; }
+[ ! APACHE_ERR ] || [ ! NFS_ERR ] || [ ! SAMBA_ERR ] && { echo -e $HELP; }
