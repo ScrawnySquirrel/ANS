@@ -48,15 +48,15 @@ echo "${UNAME}'s home page" > $UHOME/public_html/index.html
 
 AUTH_FILE=$UNAME
 
-# Comment out
+# Allow user specific public_html
 sed -i '/<Directory \"\/home\/\*\/public_html\">/,/<\/Directory>/d' $UDIR_PATH
 
-# Append if not already
+# Set passwords config
 if ! grep "<Directory /var/www/html/passwords>" $UDIR_PATH; then
   echo -e "<Directory /var/www/html/passwords>\n  order deny,allow\n  deny from all\n</Directory>\n" >> $UDIR_PATH
 fi
 
-# Append for user
+# Append user configuration
 if ! grep "<Directory /home/$UNAME>" $UDIR_PATH; then
   echo -e "<Directory /home/$UNAME>\n  AllowOverride None\n  AuthUserFile /var/www/html/passwords/$AUTH_FILE\n  AuthGroupFile /dev/null\n  AuthName test\n  AuthType Basic\n  <Limit GET>\n    require valid-user\n    order deny,allow\n    deny from all\n    allow from all\n  </Limit>\n</Directory>\n" >> $UDIR_PATH
 fi
